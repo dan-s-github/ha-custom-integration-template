@@ -1,0 +1,34 @@
+# {{ integration_name }}
+
+Home Assistant custom integration scaffold.
+
+## Features
+
+- Config flow scaffold
+- Config entry lifecycle scaffold
+- Optional sensor platform scaffold
+- Test scaffold for config flow, setup/unload, and optional sensor platform
+
+## Installation
+
+### HACS (recommended)
+
+1. Add this repository as a custom repository in HACS.
+2. Install `{{ integration_name }}`.
+3. Restart Home Assistant.
+4. Add the integration from Settings -> Devices & Services.
+
+### Manual
+
+1. Copy `custom_components/{{ domain }}` into your Home Assistant `custom_components` directory.
+2. Restart Home Assistant.
+3. Add the integration from Settings -> Devices & Services.
+
+## Development
+
+```bash
+./scripts/setup
+./scripts/lint
+pytest
+./scripts/develop
+```

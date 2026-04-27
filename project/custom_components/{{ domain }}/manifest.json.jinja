@@ -1,0 +1,14 @@
+{
+  "domain": "{{ domain }}",
+  "name": "{{ integration_name }}",
+  "codeowners": [
+    "@{{ github_username }}"
+  ],
+  "config_flow": true,
+  "dependencies": [{% set deps = ha_dependencies_csv.split(',') | map('trim') | reject('equalto', '') | list %}{% for dep in deps %}"{{ dep }}"{% if not loop.last %}, {% endif %}{% endfor %}],
+  "documentation": "https://github.com/{{ github_username }}/{{ project_slug }}",
+  "iot_class": "{{ iot_class }}",
+  "issue_tracker": "https://github.com/{{ github_username }}/{{ project_slug }}/issues",
+  "requirements": [{% set reqs = requirements_csv.split(',') | map('trim') | reject('equalto', '') | list %}{% for req in reqs %}"{{ req }}"{% if not loop.last %}, {% endif %}{% endfor %}],
+  "version": "{{ version }}"
+}

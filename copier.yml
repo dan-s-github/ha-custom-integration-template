@@ -1,0 +1,83 @@
+_subdirectory: project
+_answers_file: .copier-answers.yml
+
+project_slug:
+  type: str
+  help: Repository/package name (for example ha-my-integration)
+  default: ha-my-integration
+
+integration_name:
+  type: str
+  help: Integration display name in Home Assistant
+  default: My Integration
+
+domain:
+  type: str
+  help: Home Assistant domain/module name (lowercase, no spaces)
+  default: my_integration
+
+config_flow_class:
+  type: str
+  help: Config flow class name
+  default: MyIntegrationConfigFlow
+
+sensor_entity_class:
+  type: str
+  help: Sensor entity class name (used when include_sensor_platform is true)
+  default: MyIntegrationSensor
+
+include_sensor_platform:
+  type: bool
+  help: Include a minimal sensor platform scaffold
+  default: true
+
+ha_dependencies_csv:
+  type: str
+  help: Comma-separated Home Assistant integration dependencies for manifest.json
+  default: ""
+
+requirements_csv:
+  type: str
+  help: Comma-separated Python package requirements for manifest.json and pyproject.toml
+  default: ""
+
+iot_class:
+  type: str
+  choices:
+    - local_push
+    - local_polling
+    - cloud_push
+    - cloud_polling
+    - assumed_state
+    - calculated
+  default: local_polling
+
+version:
+  type: str
+  help: Initial integration version
+  default: 0.1.0
+
+open_source_license:
+  type: str
+  help: "The open source license to use"
+  choices:
+    MIT: MIT
+    Apache Software License 2.0: Apache-2.0
+    GNU General Public License v3: GPL-3.0-only
+    Not open source: "Not open source"
+
+author_name:
+  type: str
+  help: Author name for generated project metadata
+
+author_email:
+  type: str
+  help: Author email for generated project metadata
+
+copyright_year:
+  type: str
+  default: "2026"
+
+github_username:
+  type: str
+  help: GitHub username or organization for documentation and issue links
