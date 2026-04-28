@@ -1,5 +1,17 @@
 # {{ integration_name }}
 
+[![HACS][hacsbadge]][hacs]
+[![GitHub Release][releases-shield]][releases]
+[![Integration Usage][downloads-shield]][downloads]
+
+[![Home Assistant][ha-shield]][ha]
+[![Python Version][python-shield]][python]
+[![License][license-shield]](LICENSE)
+
+[![Tests][tests-shield]][tests]
+[![Code Style: Ruff][ruff-shield]][ruff]
+[![GitHub Activity][commits-shield]][commits]
+
 Home Assistant custom integration scaffold.
 
 ## Features
@@ -30,5 +42,23 @@ Home Assistant custom integration scaffold.
 ./scripts/setup
 ./scripts/lint
 pytest
-./scripts/develop
 ```
+
+[releases-shield]: https://img.shields.io/github/release/{{ github_username }}/{{ project_slug }}.svg?style=flat&logo=github
+[releases]: https://github.com/{{ github_username }}/{{ project_slug }}/releases
+[downloads-shield]: https://img.shields.io/badge/dynamic/json?color=41BDF5&logo=home-assistant&label=integration%20usage&suffix=%20installs&cacheSeconds=15600&url=https://analytics.home-assistant.io/custom_integrations.json&query=%24.{{ domain }}.total
+[downloads]: https://analytics.home-assistant.io/custom_integrations/{{ domain }}
+[commits-shield]: https://img.shields.io/github/commit-activity/y/{{ github_username }}/{{ project_slug }}.svg?style=flat&logo=github
+[commits]: https://github.com/{{ github_username }}/{{ project_slug }}/commits/main
+[license-shield]: https://img.shields.io/github/license/{{ github_username }}/{{ project_slug }}.svg?style=flat
+[python-shield]: https://img.shields.io/badge/python-3.14+-blue.svg?style=flat&logo=python&logoColor=white
+[python]: https://www.python.org/
+[ha-shield]: https://img.shields.io/badge/Home%20Assistant-2026.3.0+-blue.svg?style=flat&logo=homeassistant&logoColor=white
+[ha]: https://www.home-assistant.io/
+[tests-shield]: https://img.shields.io/github/actions/workflow/status/{{ github_username }}/{{ project_slug }}/ci.yml?branch=main&style=flat&logo=github
+[tests]: https://github.com/{{ github_username }}/{{ project_slug }}/actions/workflows/ci.yml
+[ruff-shield]: https://img.shields.io/badge/code%20style-ruff-000000.svg?style=flat&logo=ruff&logoColor=white
+[ruff]: https://github.com/astral-sh/ruff
+[hacs]: https://github.com/hacs/integration
+[hacsbadge]: https://img.shields.io/badge/HACS-Custom-orange.svg?style=flat&logo=homeassistant&logoColor=white
+[issues]: https://github.com/{{ github_username }}/{{ project_slug }}/issues
