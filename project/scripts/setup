@@ -4,7 +4,7 @@ set -e
 
 cd "$(dirname "$0")/.."
 
-UV_REQUIRED_VERSION="0.10.6"
+UV_REQUIRED_VERSION="0.13.6"
 
 if ! command -v uv &> /dev/null; then
     echo "Installing uv..."

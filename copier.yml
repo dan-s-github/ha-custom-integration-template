@@ -21,6 +21,12 @@ config_flow_class:
   help: Config flow class name
   default: MyIntegrationConfigFlow
 
+config_entry_type:
+  type: str
+  help: Typed ConfigEntry alias name
+  default: "{{ config_flow_class | replace('ConfigFlow', '') }}ConfigEntry"
+  when: false
+
 sensor_entity_class:
   type: str
   help: Sensor entity class name (used when include_sensor_platform is true)

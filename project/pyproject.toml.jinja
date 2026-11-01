@@ -81,6 +81,7 @@ lint.ignore = [
     "D203", # no-blank-line-before-class (incompatible with formatter)
     "D212", # multi-line-summary-first-line (incompatible with formatter)
     "COM812", # incompatible with formatter
+    "CPY001", # Copyright notices are not used; the license lives in LICENSE
     "ISC001", # incompatible with formatter
 ]
 lint.isort.known-first-party = ["custom_components", "tests"]
@@ -93,11 +94,20 @@ lint.per-file-ignores."tests/**/*.py" = [
     "PLR0913", # Test fixtures/helpers may need multiple explicit fields
     "PLR2004", # Literal values in test assertions are intentional
     "S101", # Pytest uses assert statements
+    "TC002", # Test signatures import HomeAssistant at runtime, as in HA core
 ]
 
 [tool.commitizen]
 name = "cz_conventional_commits"
 version_provider = "pep621"
 version_files = ["custom_components/{{ domain }}/manifest.json:version"]
+# Keep the project version recorded in uv.lock in sync; cz bump commits with -a,
+# so the regenerated lockfile lands in the bump commit. $UV is the uv binary
+# that launched `uv run`; plain `uv` would resolve to the older copy that
+# homeassistant installs into the venv and rewrite the lockfile format.
+pre_bump_hooks = ["${UV:-uv} lock"]
 tag_format = "v$version"
 update_changelog_on_bump = true
+# Fold RC entries into the final release so its changelog lists everything
+# shipped since the previous final release.
+changelog_merge_prerelease = true
