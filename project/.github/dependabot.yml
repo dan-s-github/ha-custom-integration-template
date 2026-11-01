@@ -1,0 +1,18 @@
+# https://docs.github.com/en/code-security/dependabot/dependabot-version-updates/configuration-options-for-the-dependabot.yml-file
+version: 2
+updates:
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+
+  - package-ecosystem: "uv"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    ignore:
+      # homeassistant and pytest-homeassistant-custom-component are pinned as a
+      # pair (each harness release requires one exact homeassistant version),
+      # so bump them together by hand.
+      - dependency-name: "homeassistant"
+      - dependency-name: "pytest-homeassistant-custom-component"
