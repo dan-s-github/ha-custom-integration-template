@@ -34,11 +34,19 @@ copier copy \
 # Basic generated project assertions.
 test -f "${TMP_DEFAULT}/.pre-commit-config.yaml"
 test -f "${TMP_DEFAULT}/custom_components/my_integration/manifest.json"
+test -f "${TMP_DEFAULT}/.github/workflows/ci.yml"
+test -f "${TMP_DEFAULT}/.github/workflows/lint.yml"
+test -f "${TMP_DEFAULT}/.github/workflows/release.yml"
+test -f "${TMP_DEFAULT}/.github/workflows/validate.yml"
 test -f "${TMP_DEFAULT}/tests/test_config_flow.py"
 grep -q "^\[tool.ruff\]" "${TMP_DEFAULT}/pyproject.toml"
 
 test -f "${TMP_NO_SENSOR}/.pre-commit-config.yaml"
 test -f "${TMP_NO_SENSOR}/custom_components/test_integration/manifest.json"
+test -f "${TMP_NO_SENSOR}/.github/workflows/ci.yml"
+test -f "${TMP_NO_SENSOR}/.github/workflows/lint.yml"
+test -f "${TMP_NO_SENSOR}/.github/workflows/release.yml"
+test -f "${TMP_NO_SENSOR}/.github/workflows/validate.yml"
 test -f "${TMP_NO_SENSOR}/tests/test_config_flow.py"
 grep -q "^\[tool.ruff\]" "${TMP_NO_SENSOR}/pyproject.toml"
 
