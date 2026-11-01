@@ -39,6 +39,13 @@ jobs:
           fetch-tags: true
           token: ${{ steps.app_token.outputs.token }}
 
+      - name: Check for uv.lock
+        run: |
+          if [[ ! -f uv.lock ]]; then
+            echo "::error::uv.lock is missing. Run ./scripts/setup and commit uv.lock."
+            exit 1
+          fi
+
       - name: Set up Python
         uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
         with:
@@ -104,7 +111,11 @@ jobs:
           else
             # Compare against the previous final release, not the latest RC, so
             # the PR list covers everything shipped in this release's RCs.
-            PREV_TAG=$(git describe --tags --abbrev=0 --exclude '*rc*' "$TAG^")
-            EXTRA_ARGS=(--notes-start-tag "$PREV_TAG")
+            if PREV_TAG=$(git describe --tags --abbrev=0 --exclude '*rc*' "$TAG^" 2>/dev/null); then
+              EXTRA_ARGS=(--notes-start-tag "$PREV_TAG")
+            else
+              # First final release: there is no earlier one to compare against.
+              EXTRA_ARGS=()
+            fi
           fi
           gh release create "$TAG" --notes-file release-notes.md --generate-notes "${EXTRA_ARGS[@]}"

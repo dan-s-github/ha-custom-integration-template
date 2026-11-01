@@ -24,7 +24,7 @@ config_flow_class:
 config_entry_type:
   type: str
   help: Typed ConfigEntry alias name
-  default: "{{ config_flow_class | replace('ConfigFlow', '') }}ConfigEntry"
+  default: "{{ config_flow_class.split('ConfigFlow')[0] or 'Integration' }}ConfigEntry"
   when: false
 
 sensor_entity_class:

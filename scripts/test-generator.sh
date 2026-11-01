@@ -8,7 +8,9 @@ TMP_NO_SENSOR="/tmp/ha-template-no-sensor"
 
 rm -rf "${TMP_DEFAULT}" "${TMP_NO_SENSOR}"
 
+# --vcs-ref HEAD renders the checked-out commit, not the latest tag.
 copier copy \
+  --vcs-ref HEAD \
   --defaults \
   --force \
   --data author_name="Template Tester" \
@@ -19,6 +21,7 @@ copier copy \
   "${TMP_DEFAULT}"
 
 copier copy \
+  --vcs-ref HEAD \
   --force \
   --data include_sensor_platform=false \
   --data integration_name="Test Integration" \
@@ -50,7 +53,16 @@ test -f "${TMP_NO_SENSOR}/.github/workflows/validate.yml"
 test -f "${TMP_NO_SENSOR}/tests/test_config_flow.py"
 grep -q "^\[tool.ruff\]" "${TMP_NO_SENSOR}/pyproject.toml"
 
-python3 -m compileall "${TMP_DEFAULT}/custom_components" "${TMP_DEFAULT}/tests"
-python3 -m compileall "${TMP_NO_SENSOR}/custom_components" "${TMP_NO_SENSOR}/tests"
+# Run the same checks as the generated project's own CI.
+for project_dir in "${TMP_DEFAULT}" "${TMP_NO_SENSOR}"; do
+  (
+    cd "${project_dir}"
+    uv sync --group dev
+    uv run --frozen ruff check .
+    uv run --frozen ruff format --check .
+    uv run --frozen pytest -q
+    uv run --frozen mypy custom_components
+  )
+done
 
 echo "Generator tests passed."
