@@ -7,6 +7,8 @@ repos:
       - id: trailing-whitespace
       - id: check-merge-conflict
       - id: check-added-large-files
+        # uv.lock is committed (CI runs uv sync --frozen) and exceeds 500 KB.
+        exclude: ^uv\.lock$
 
   - repo: https://github.com/astral-sh/ruff-pre-commit
     rev: v0.15.0

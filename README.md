@@ -18,19 +18,19 @@ It includes:
 ## Use It
 
 ```bash
-copier copy https://github.com/dan-s-github/ha-custom-integration-template /path/to/new-repo
+copier copy --trust https://github.com/dan-s-github/ha-custom-integration-template /path/to/new-repo
 ```
 
 Example with a concrete target directory:
 
 ```bash
-copier copy https://github.com/dan-s-github/ha-custom-integration-template ~/Github/ha_projects/ha-my-integration
+copier copy --trust https://github.com/dan-s-github/ha-custom-integration-template ~/Github/ha_projects/ha-my-integration
 ```
 
 Example pinned to a tag:
 
 ```bash
-copier copy https://github.com/dan-s-github/ha-custom-integration-template --vcs-ref v0.1.0 ~/Github/ha_projects/ha-my-integration
+copier copy --trust https://github.com/dan-s-github/ha-custom-integration-template --vcs-ref v0.1.0 ~/Github/ha_projects/ha-my-integration
 ```
 
 Template repository layout:
@@ -82,3 +82,7 @@ pytest
 
 - The template is intentionally generic and avoids protocol-specific assumptions.
 - Use `requirements_csv` and `ha_dependencies_csv` to declare external/runtime dependencies.
+- Use `hacs_country_csv` (e.g. `NZ` or `NZ,AU`) to limit the HACS listing to some countries; leave it blank for all.
+- Set `brand_icon_path` to an absolute path to a square PNG (512 px or more) to use it as the brand icon; the copier task writes `brand/icon.png` (256 px) and `brand/icon@2x.png` (512 px). Leave it blank for a placeholder icon, and replace that before publishing. Home Assistant falls back to `icon.png` for the logo and dark variants; add `logo.png`, `dark_icon.png` and so on to `brand/` by hand if you want them.
+- The template runs a copier task for the icon, so `copier copy` and `copier update` need `--trust`.
+- Generated projects record their answers in `.copier-answers.yml`, so `copier update` can apply later template changes. Commit that file.
