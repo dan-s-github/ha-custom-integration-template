@@ -1,6 +1,22 @@
 _subdirectory: project
 _answers_file: .copier-answers.yml
 
+# Needs --trust (copier treats any task as unsafe). brand/ and scripts/ sit
+# outside _subdirectory, so they aren't copied into generated projects.
+_tasks:
+  - command:
+      - uv
+      - run
+      - --no-project
+      - --with
+      - pillow
+      - python
+      - "{{ _copier_conf.src_path }}/scripts/brand_icon.py"
+      - "{{ _copier_conf.src_path }}/brand"
+      - "{{ brand_icon_path }}"
+      - "custom_components/{{ domain }}/brand"
+      - "{{ _copier_operation }}"
+
 project_slug:
   type: str
   help: Repository/package name (for example ha-my-integration)
@@ -50,6 +66,11 @@ requirements_csv:
 hacs_country_csv:
   type: str
   help: Comma-separated ISO 3166-1 alpha-2 country codes for hacs.json (blank for all countries)
+  default: ""
+
+brand_icon_path:
+  type: str
+  help: Absolute path to a square PNG (512 px or more) for the brand icon; blank uses a placeholder
   default: ""
 
 iot_class:
