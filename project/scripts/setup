@@ -4,19 +4,22 @@ set -e
 
 cd "$(dirname "$0")/.."
 
-UV_REQUIRED_VERSION="0.13.6"
+# Oldest uv that writes the uv.lock format CI reads (the workflows install
+# 0.13.6). Newer is fine. Never install or change uv here: it may come from
+# Homebrew, the standalone installer or pipx.
+UV_MIN_VERSION="0.13.6"
 
 if ! command -v uv &> /dev/null; then
-    echo "Installing uv..."
-    python3 -m pip install --user "uv==${UV_REQUIRED_VERSION}"
-    export PATH="$HOME/.local/bin:$PATH"
-else
-    UV_CURRENT_VERSION="$(uv --version | awk '{print $2}')"
-    if [[ "${UV_CURRENT_VERSION}" != "${UV_REQUIRED_VERSION}" ]]; then
-        echo "Updating uv from ${UV_CURRENT_VERSION} to ${UV_REQUIRED_VERSION}..."
-        python3 -m pip install --user "uv==${UV_REQUIRED_VERSION}"
-        export PATH="$HOME/.local/bin:$PATH"
-    fi
+    echo "uv is not installed. See https://docs.astral.sh/uv/getting-started/installation/" >&2
+    exit 1
+fi
+
+UV_CURRENT_VERSION="$(uv --version | awk '{print $2}')"
+UV_OLDEST="$(printf '%s\n' "${UV_MIN_VERSION}" "${UV_CURRENT_VERSION}" | sort -V | head -n 1)"
+if [[ "${UV_OLDEST}" != "${UV_MIN_VERSION}" ]]; then
+    echo "uv ${UV_CURRENT_VERSION} is older than ${UV_MIN_VERSION}." >&2
+    echo "Upgrade it the way it was installed, e.g. 'uv self update' or 'brew upgrade uv'." >&2
+    exit 1
 fi
 
 uv sync --group dev
