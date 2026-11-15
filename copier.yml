@@ -47,6 +47,11 @@ requirements_csv:
   help: Comma-separated Python package requirements for manifest.json and pyproject.toml
   default: ""
 
+hacs_country_csv:
+  type: str
+  help: Comma-separated ISO 3166-1 alpha-2 country codes for hacs.json (blank for all countries)
+  default: ""
+
 iot_class:
   type: str
   choices:

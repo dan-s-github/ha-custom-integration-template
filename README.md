@@ -82,3 +82,5 @@ pytest
 
 - The template is intentionally generic and avoids protocol-specific assumptions.
 - Use `requirements_csv` and `ha_dependencies_csv` to declare external/runtime dependencies.
+- Use `hacs_country_csv` (e.g. `NZ` or `NZ,AU`) to limit the HACS listing to some countries; leave it blank for all.
+- Generated projects record their answers in `.copier-answers.yml`, so `copier update` can apply later template changes. Commit that file.
