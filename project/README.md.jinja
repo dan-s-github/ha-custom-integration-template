@@ -38,10 +38,12 @@ Home Assistant custom integration scaffold.
 
 ## Development
 
+Needs [uv](https://docs.astral.sh/uv/getting-started/installation/) 0.13.6 or newer.
+
 ```bash
 ./scripts/setup  # creates uv.lock; commit it, the GitHub workflows need it
 ./scripts/lint
-pytest
+uv run --group dev pytest
 ```
 
 [releases-shield]: https://img.shields.io/github/release/{{ github_username }}/{{ project_slug }}.svg?style=flat&logo=github

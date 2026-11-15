@@ -74,7 +74,7 @@ Then in the generated project:
 ```bash
 ./scripts/setup
 ./scripts/lint
-pytest
+uv run --group dev pytest
 ./scripts/develop
 ```
 
