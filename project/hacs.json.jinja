@@ -1,6 +1,9 @@
 {
   "name": "{{ integration_name }}",
   "content_in_root": false,
-  "country": ["*"],
+{%- set countries = hacs_country_csv.split(',') | map('trim') | map('upper') | reject('equalto', '') | list %}
+{%- if countries %}
+  "country": [{% for c in countries %}"{{ c }}"{% if not loop.last %}, {% endif %}{% endfor %}],
+{%- endif %}
   "homeassistant": "2026.9.0"
 }

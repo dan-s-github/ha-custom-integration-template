@@ -2,11 +2,15 @@
 
 ## Setup
 
+Needs [uv](https://docs.astral.sh/uv/getting-started/installation/) 0.13.6 or
+newer. `scripts/setup` checks the version but never installs or upgrades uv.
+
 ```bash
 ./scripts/setup
 ```
 
-This installs pre-commit hooks for linting and commit message checks.
+This installs the dev dependencies and the pre-commit hooks for linting and
+commit message checks.
 
 ## Development
 
@@ -19,7 +23,7 @@ This installs pre-commit hooks for linting and commit message checks.
 ```bash
 ./scripts/lint
 uv run --group dev pre-commit run --all-files
-pytest
+uv run --group dev pytest
 ```
 
 Commit `uv.lock`: the GitHub workflows install with `uv sync --frozen`.
