@@ -42,11 +42,11 @@ dev = [
     "aiousbwatcher",
     "commitizen>=3.29.1",
     "colorlog>=6.10.1",
-    "homeassistant==2026.10.4",
+    "homeassistant==2026.11.2",
     "pycares>=5.0.0,<6",
     "pytest>=8.2.0",
     "pytest-asyncio>=1.3.0",
-    "pytest-homeassistant-custom-component==0.13.375",
+    "pytest-homeassistant==2026.11.2",
     "pyserial",
     "ruff>=0.15.0",
     "mypy>=1.8.0",
@@ -58,6 +58,9 @@ packages = ["custom_components/{{ domain }}"]
 
 [tool.pytest.ini_options]
 asyncio_mode = "auto"
+asyncio_default_fixture_loop_scope = "function"
+# Let Home Assistant install its httpx alias before respx is imported.
+addopts = "-p no:respx"
 testpaths = ["tests"]
 minversion = "8.2"
 
