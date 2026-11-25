@@ -21,3 +21,7 @@ updates:
       # so bump them together by hand.
       - dependency-name: "homeassistant"
       - dependency-name: "pytest-homeassistant"
+      # pytest-homeassistant pins exact pytest and pytest-asyncio versions, so
+      # newer releases can't resolve until the harness moves; they follow it.
+      - dependency-name: "pytest"
+      - dependency-name: "pytest-asyncio"
